@@ -26,4 +26,31 @@ class BowlingScorerTest {
 
         Assertions.assertEquals(0, score);
     }
+
+    @Test
+    public void shouldReturnScore_WhenHavingAllNotMissedSpins() {
+        List<String> spins = Arrays.asList("11", "22", "33", "44");
+
+        int score = new BowlingScorer().score(spins);
+
+        Assertions.assertEquals(20, score);
+    }
+
+    @Test
+    public void shouldReturnScore_WhenHavingSomeMissedSpins() {
+        List<String> spins = Arrays.asList("1-", "-2", "33", "-4");
+
+        int score = new BowlingScorer().score(spins);
+
+        Assertions.assertEquals(13, score);
+    }
+
+    @Test
+    public void shouldReturnScore_WhenHavingAtLeastOneSpare() {
+        List<String> spins = Arrays.asList("11", "2/", "3-", "14");
+
+        int score = new BowlingScorer().score(spins);
+
+        Assertions.assertEquals(25, score);
+    }
 }
